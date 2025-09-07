@@ -1,17 +1,28 @@
-{% extends "base.html" %} {% block content %}
-<h1>New Maintenance Log</h1>
+{% extends "base.html" %}
+{% block content %}
+<h1 class="page-title">New Maintenance Log</h1>
 
-<form method="post">
+<form method="post" class="formbox">
   {% csrf_token %}
-  <fieldset>{{ form.as_p }}</fieldset>
 
-  <h3>Steps</h3>
-  {{ formset.management_form }} {% for f in formset %}
-  <div style="margin: 0.75rem 0; padding: 0.5rem; border: 1px solid #ddd">
-    {{ f.as_p }}
+  <div class="fieldset">
+    <h3 style="margin:0 0 8px 0">Log Details</h3>
+    {{ form.as_p }}
   </div>
-  {% endfor %}
 
-  <button type="submit">Save</button>
+  <div class="fieldset">
+    <h3 style="margin:0 0 8px 0">Steps</h3>
+    {{ formset.management_form }}
+    {% for f in formset %}
+      <div class="step">
+        {{ f.as_p }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div>
+    <button class="btn btn-primary" type="submit">Save Log</button>
+    <a class="btn" href="{% url 'maintenance:log_list' %}">Cancel</a>
+  </div>
 </form>
 {% endblock %}

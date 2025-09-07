@@ -1,32 +1,38 @@
-{% extends "base.html" %} {% block content %}
-<h1>[Zone {{ log.zone }}] {{ log.alarm_code }} — {{ log.alarm_name }}</h1>
-<p>
-  <strong>Difficulty:</strong> {{ log.difficulty }} |
-  <strong>LAM checked:</strong> {{ log.lam_checked|yesno:"Yes,No" }}
-</p>
-{% if log.equipment %}
-<p>
-  <strong>Equipment:</strong> {{ log.equipment.name }} ({{
-  log.equipment.asset_tag }})
-</p>
-{% endif %}
-<p><strong>Description:</strong><br />{{ log.description|linebreaks }}</p>
+{% extends "base.html" %}
+{% block content %}
+<h1 class="page-title">[Zone {{ log.zone }}] {{ log.alarm_code }} — {{ log.alarm_name|default:"(unnamed)" }}</h1>
 
-<h2>Steps</h2>
-<ol>
-  {% for step in log.steps.all %}
-  <li>
-    <p><strong>Action:</strong> {{ step.action|linebreaks }}</p>
-    {% if step.result %}
-    <p><strong>Result:</strong> {{ step.result|linebreaks }}</p>
-    {% endif %} {% if step.duration_minutes %}
-    <p><strong>Duration:</strong> {{ step.duration_minutes }} min</p>
-    {% endif %} {% if step.performed_by %}
-    <p><em>Performed by {{ step.performed_by }}</em></p>
-    {% endif %}
-  </li>
-  {% empty %}
-  <li>No steps captured.</li>
-  {% endfor %}
-</ol>
+<div class="card" style="margin-bottom:14px">
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <span class="chip">{{ log.difficulty }}</span>
+    <span class="chip">LAM: {{ log.lam_checked|yesno:"Yes,No" }}</span>
+    {% if log.equipment %}<span class="chip">Equipment: {{ log.equipment.name }}</span>{% endif %}
+    <span class="chip">Created: {{ log.created_at|date:"Y-m-d H:i" }}</span>
+    {% if log.created_by %}<span class="chip">By: {{ log.created_by }}</span>{% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin:0 0 8px 0">Problem & Summary</h3>
+  <p style="margin:0;white-space:pre-line">{{ log.description }}</p>
+</div>
+
+<div class="card" style="margin-top:14px">
+  <h3 style="margin:0 0 8px 0">Steps</h3>
+  <ol class="stepset" style="padding-left:20px;margin:0">
+    {% for step in log.steps.all %}
+      <li class="step">
+        <div style="font-weight:700;margin-bottom:6px">Step {{ step.order }}</div>
+        <div><strong>Action:</strong> <span style="white-space:pre-line">{{ step.action }}</span></div>
+        {% if step.result %}<div style="margin-top:6px"><strong>Result:</strong> <span style="white-space:pre-line">{{ step.result }}</span></div>{% endif %}
+        <div style="display:flex;gap:10px;margin-top:8px;color:var(--ink-2);font-size:13px">
+          {% if step.duration_minutes %}<span class="chip">{{ step.duration_minutes }} min</span>{% endif %}
+          {% if step.performed_by %}<span class="chip">By {{ step.performed_by }}</span>{% endif %}
+        </div>
+      </li>
+    {% empty %}
+      <li class="empty">No steps captured.</li>
+    {% endfor %}
+  </ol>
+</div>
 {% endblock %}

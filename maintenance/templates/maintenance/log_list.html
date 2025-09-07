@@ -1,30 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Maintenance Logs</h1>
+<h1 class="page-title">Maintenance Logs</h1>
 
-<form method="get" style="margin-bottom:1rem">
-  <input type="text" name="q" value="{{ q }}" placeholder="Search alarm/keyword…" />
-  <input type="number" name="zone" min="1" max="22" value="{{ zone }}" placeholder="Zone (1–22)" />
-  <select name="difficulty">
+<form method="get" class="filters card" style="gap:12px">
+  <input class="input" type="text" name="q" value="{{ q }}" placeholder="Search alarm/keyword…" />
+  <input class="input" type="number" name="zone" min="1" max="22" value="{{ zone }}" placeholder="Zone (1–22)" style="width:120px" />
+  <select name="difficulty" class="input" style="width:170px">
     <option value="">Any difficulty</option>
-    <option value="Easy" {% if difficulty == "Easy" %}selected{% endif %}>Easy</option>
+    <option value="Easy"   {% if difficulty == "Easy" %}selected{% endif %}>Easy</option>
     <option value="Medium" {% if difficulty == "Medium" %}selected{% endif %}>Medium</option>
-    <option value="Hard" {% if difficulty == "Hard" %}selected{% endif %}>Hard</option>
+    <option value="Hard"   {% if difficulty == "Hard" %}selected{% endif %}>Hard</option>
   </select>
-  <button type="submit">Filter</button>
+  <button class="btn btn-primary" type="submit">Filter</button>
 </form>
 
-<ul>
+<ul class="list">
   {% for log in logs %}
-    <li>
-      <a href="{% url 'maintenance:log_detail' log.pk %}">
-        [Zone {{ log.zone }}] {{ log.alarm_code }} — {{ log.alarm_name }} ({{ log.difficulty }})
-      </a>
-      {% if log.equipment %} — {{ log.equipment.name }} ({{ log.equipment.asset_tag }}){% endif %}
-      <small> · {{ log.created_at|date:"Y-m-d H:i" }} by {{ log.created_by|default:"—" }}</small>
+    <li class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between">
+        <div>
+          <div style="font-weight:700">
+            <a href="{% url 'maintenance:log_detail' log.pk %}">
+              [Zone {{ log.zone }}] {{ log.alarm_code }} — {{ log.alarm_name|default:"(unnamed)" }}
+            </a>
+          </div>
+          <div class="chip" style="margin-top:6px">{{ log.difficulty }}</div>
+          {% if log.lam_checked %}<span class="chip" style="margin-left:6px">LAM checked</span>{% endif %}
+          {% if log.equipment %}
+            <div style="margin-top:6px;color:var(--ink-2)">Equipment: {{ log.equipment.name }} ({{ log.equipment.asset_tag }})</div>
+          {% endif %}
+        </div>
+        <div style="text-align:right;color:var(--ink-2);font-size:13px">
+          {{ log.created_at|date:"Y-m-d H:i" }}<br>
+          by {{ log.created_by|default:"—" }}
+        </div>
+      </div>
     </li>
   {% empty %}
-    <li>No logs found.</li>
+    <li class="empty">
+      <strong>No logs found.</strong>
+      <div style="margin-top:6px">Be the first to document a fix—capture a new maintenance log.</div>
+      <div style="margin-top:10px">
+        <a class="btn btn-primary" href="{% url 'maintenance:log_create' %}">New Log</a>
+      </div>
+    </li>
   {% endfor %}
 </ul>
 {% endblock %}
