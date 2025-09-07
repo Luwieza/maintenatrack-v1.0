@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block content %}
+<h1>New Maintenance Log</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <fieldset>{{ form.as_p }}</fieldset>
+
+  <h3>Steps</h3>
+  {{ formset.management_form }} {% for f in formset %}
+  <div style="margin: 0.75rem 0; padding: 0.5rem; border: 1px solid #ddd">
+    {{ f.as_p }}
+  </div>
+  {% endfor %}
+
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

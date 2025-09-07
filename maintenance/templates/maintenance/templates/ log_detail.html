@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content %}
+<h1>[Zone {{ log.zone }}] {{ log.alarm_code }} — {{ log.alarm_name }}</h1>
+<p>
+  <strong>Difficulty:</strong> {{ log.difficulty }} |
+  <strong>LAM checked:</strong> {{ log.lam_checked|yesno:"Yes,No" }}
+</p>
+{% if log.equipment %}
+<p>
+  <strong>Equipment:</strong> {{ log.equipment.name }} ({{
+  log.equipment.asset_tag }})
+</p>
+{% endif %}
+<p><strong>Description:</strong><br />{{ log.description|linebreaks }}</p>
+
+<h2>Steps</h2>
+<ol>
+  {% for step in log.steps.all %}
+  <li>
+    <p><strong>Action:</strong> {{ step.action|linebreaks }}</p>
+    {% if step.result %}
+    <p><strong>Result:</strong> {{ step.result|linebreaks }}</p>
+    {% endif %} {% if step.duration_minutes %}
+    <p><strong>Duration:</strong> {{ step.duration_minutes }} min</p>
+    {% endif %} {% if step.performed_by %}
+    <p><em>Performed by {{ step.performed_by }}</em></p>
+    {% endif %}
+  </li>
+  {% empty %}
+  <li>No steps captured.</li>
+  {% endfor %}
+</ol>
+{% endblock %}

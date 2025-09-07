@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Maintenance Logs</h1>
+
+<form method="get" style="margin-bottom:1rem">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search alarm/keyword…" />
+  <input type="number" name="zone" min="1" max="22" value="{{ zone }}" placeholder="Zone (1–22)" />
+  <select name="difficulty">
+    <option value="">Any difficulty</option>
+    <option value="Easy" {% if difficulty == "Easy" %}selected{% endif %}>Easy</option>
+    <option value="Medium" {% if difficulty == "Medium" %}selected{% endif %}>Medium</option>
+    <option value="Hard" {% if difficulty == "Hard" %}selected{% endif %}>Hard</option>
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+<ul>
+  {% for log in logs %}
+    <li>
+      <a href="{% url 'maintenance:log_detail' log.pk %}">
+        [Zone {{ log.zone }}] {{ log.alarm_code }} — {{ log.alarm_name }} ({{ log.difficulty }})
+      </a>
+      {% if log.equipment %} — {{ log.equipment.name }} ({{ log.equipment.asset_tag }}){% endif %}
+      <small> · {{ log.created_at|date:"Y-m-d H:i" }} by {{ log.created_by|default:"—" }}</small>
+    </li>
+  {% empty %}
+    <li>No logs found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
