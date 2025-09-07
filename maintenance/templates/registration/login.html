@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <h1 class="page-title">Sign in</h1>
-<div class="card">
+
+<div class="card center-card">
   <form method="post" class="formbox">
     {% csrf_token %}
     {{ form.as_p }}

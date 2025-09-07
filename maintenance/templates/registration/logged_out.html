@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<meta http-equiv="refresh" content="0;url={% url 'maintenance:log_list' %}">
+<p class="card">You have been logged out. Redirecting… <a href="{% url 'maintenance:log_list' %}">Go now</a></p>
+{% endblock %}
