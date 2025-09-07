@@ -9,20 +9,25 @@
 
     <style>
       :root {
+        /* Brand */
         --jj-red: #e4002b; /* Johnson & Johnson red */
+
+        /* Low-glare surface + ink */
         --ink: #111;
         --ink-2: #444;
-        --line: #eaeaea;
-        --bg: #fff;
-        --bg-soft: #fafafa;
-        --ring: rgba(228, 0, 43, 0.25);
-        --shadow: 0 8px 24px rgba(0,0,0,.08);
+        --bg: #f6f7f8;        /* was #fff → softer canvas */
+        --bg-soft: #f2f3f5;   /* soft panels/chips */
+        --line: #e3e5e8;      /* subtler borders */
+        --ring: rgba(228, 0, 43, 0.22);
+        --shadow: 0 8px 24px rgba(0,0,0,.06);
         --radius: 16px;
       }
       * { box-sizing: border-box; }
       html, body {
         margin: 0; padding: 0; background: var(--bg); color: var(--ink);
         font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       a { color: var(--jj-red); text-decoration: none; }
       a:hover { text-decoration: underline; }
@@ -58,14 +63,18 @@
       .center-card{ max-width: 760px; margin: 0 auto; }
 
       /* Cards & list */
-      .card { background:#fff; border:1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding:18px; }
+      .card {
+        background:#fff; border:1px solid var(--line); border-radius: var(--radius);
+        box-shadow: var(--shadow); padding:18px;
+      }
       .list { display:grid; gap:14px; }
-      .empty { padding:18px; border:1px dashed var(--line); border-radius: var(--radius); background: var(--bg-soft); }
+      .empty {
+        padding:18px; border:1px dashed var(--line); border-radius: var(--radius);
+        background: var(--bg-soft);
+      }
 
       /* Filters / Forms */
       .filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:12px 0 18px; }
-
-      /* IMPORTANT: style ALL inputs so login & signup match */
       input, select, textarea {
         border:1px solid var(--line); border-radius:10px; padding:8px 10px; outline:none; background:#fff; min-height:38px;
       }
@@ -80,7 +89,7 @@
       .stepset { display:grid; gap:10px; }
       .step { border:1px solid var(--line); border-radius:12px; padding:12px; background:#fff; }
 
-      /* Django error list styling */
+      /* Django error list */
       .errorlist{ color: var(--jj-red); margin: 0 0 8px 0; padding: 0; list-style: none; }
 
       /* Footer */
