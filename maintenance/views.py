@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import MaintenanceLog
 from .forms import MaintenanceLogForm, StepFormSet
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login as auth_login
 
 def log_list(request):
     q = request.GET.get("q", "").strip()
@@ -54,3 +56,14 @@ def log_create(request):
 
     return render(request, "maintenance/log_form.html", {"form": form, "formset": formset})
 
+# Sign-up section.
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect("maintenance:log_list")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/signup.html", {"form": form})
