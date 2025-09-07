@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 <h1 class="page-title">Create account</h1>
-<div class="card">
+
+<!-- Match login layout: centered card with the same spacing -->
+<div class="card center-card">
   <form method="post" class="formbox">
     {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="empty" style="margin-bottom:10px">{{ form.non_field_errors }}</div>
+    {% endif %}
+
     {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Sign up</button>
+
+    <div style="margin-top:6px">
+      <button class="btn btn-primary" type="submit">Sign up</button>
+      <a href="{% url 'login' %}" class="btn" style="margin-left:6px">Back to sign in</a>
+    </div>
   </form>
-  <p style="margin-top:10px">Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
 </div>
 {% endblock %}
