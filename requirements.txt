@@ -1,0 +1,10 @@
+Django==5.2.1
+gunicorn==22.0.0
+whitenoise==6.7.0
+python-dotenv==1.0.1
+
+# Dev tooling (optional)
+pytest==8.3.2
+pytest-django==4.8.0
+black==24.8.0
+isort==5.13.2

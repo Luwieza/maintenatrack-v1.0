@@ -6,6 +6,7 @@ from .models import MaintenanceLog
 from .forms import MaintenanceLogForm, StepFormSet
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login
+from django.shortcuts import render
 
 def log_list(request):
     q = request.GET.get("q", "").strip()
@@ -67,3 +68,9 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, "registration/signup.html", {"form": form})
+
+def home(request):
+    return render(request, "maintenance/home.html")
+
+def about(request):
+    return render(request, "maintenance/about.html")

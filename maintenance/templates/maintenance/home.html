@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="page-title">Welcome to MaintenaTrack</h1>
+<div class="card center-card">
+  <p>Capture fixes, share knowledge, and unjam the line faster. Search previous alarms by code or keyword and reuse proven steps.</p>
+  <p style="margin-top:10px">
+    <a class="btn btn-primary" href="{% url 'maintenance:log_list' %}">View Logs</a>
+    {% if user.is_authenticated %}
+      <a class="btn" href="{% url 'maintenance:log_create' %}" style="margin-left:8px">New Log</a>
+    {% else %}
+      <a class="btn" href="{% url 'login' %}" style="margin-left:8px">Sign in</a>
+    {% endif %}
+  </p>
+</div>
+{% endblock %}
