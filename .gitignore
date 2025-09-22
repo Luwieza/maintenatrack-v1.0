@@ -1,28 +1,24 @@
-# Python
+# Byte-compiled / cache
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
-.eggs/
 
-# OS
-.DS_Store
-Thumbs.db
+# Django & local data
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
 
-# Virtual envs & local config
+# Environments & local config
 .venv/
-env/
 venv/
+env/
 .env
 *.env
 
-# Django
-db.sqlite3
-*.sqlite3
-staticfiles/
-media/
-
-# IDE/editor
-.vscode/
+# Tooling
+*.egg-info/
+.eggs/
 .idea/
+.vscode/
+.DS_Store
+Thumbs.db
