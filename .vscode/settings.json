@@ -1,3 +1,20 @@
 {
-  "cSpell.words": ["maintenatrack", "venv"]
+  "cSpell.words": [
+    "asgiref",
+    "dotenv",
+    "gunicorn",
+    "iniconfig",
+    "isort",
+    "maintenatrack",
+    "mypy",
+    "pathspec",
+    "platformdirs",
+    "pluggy",
+    "pycache",
+    "pytest",
+    "sqlparse",
+    "staticfiles",
+    "venv",
+    "whitenoise"
+  ]
 }
