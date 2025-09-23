@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maintenance app &mdash; MaintenaTrack  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to MaintenaTrack’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MaintenaTrack
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Maintenance app</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-maintenance.models">Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.models.Equipment"><code class="docutils literal notranslate"><span class="pre">Equipment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Equipment.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Equipment.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.Status"><code class="docutils literal notranslate"><span class="pre">Equipment.Status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.asset_tag"><code class="docutils literal notranslate"><span class="pre">Equipment.asset_tag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.created_at"><code class="docutils literal notranslate"><span class="pre">Equipment.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.description"><code class="docutils literal notranslate"><span class="pre">Equipment.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Equipment.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Equipment.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Equipment.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">Equipment.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.get_status_display"><code class="docutils literal notranslate"><span class="pre">Equipment.get_status_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.id"><code class="docutils literal notranslate"><span class="pre">Equipment.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.location"><code class="docutils literal notranslate"><span class="pre">Equipment.location</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.logs"><code class="docutils literal notranslate"><span class="pre">Equipment.logs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.name"><code class="docutils literal notranslate"><span class="pre">Equipment.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.objects"><code class="docutils literal notranslate"><span class="pre">Equipment.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.status"><code class="docutils literal notranslate"><span class="pre">Equipment.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.updated_at"><code class="docutils literal notranslate"><span class="pre">Equipment.updated_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Equipment.zone"><code class="docutils literal notranslate"><span class="pre">Equipment.zone</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.models.MaintenanceLog"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.Difficulty"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.Difficulty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.alarm_code"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.alarm_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.alarm_name"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.alarm_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.clean"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.created_at"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.created_by"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.created_by</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.created_by_id"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.created_by_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.description"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.difficulty"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.difficulty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.equipment"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.equipment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.equipment_id"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.equipment_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.get_difficulty_display"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.get_difficulty_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.get_next_by_updated_at"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.get_next_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.get_previous_by_updated_at"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.get_previous_by_updated_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.id"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.lam_checked"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.lam_checked</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.objects"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.steps"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.steps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.updated_at"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.updated_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.MaintenanceLog.zone"><code class="docutils literal notranslate"><span class="pre">MaintenanceLog.zone</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.models.Step"><code class="docutils literal notranslate"><span class="pre">Step</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Step.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Step.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.action"><code class="docutils literal notranslate"><span class="pre">Step.action</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.created_at"><code class="docutils literal notranslate"><span class="pre">Step.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.duration_minutes"><code class="docutils literal notranslate"><span class="pre">Step.duration_minutes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">Step.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">Step.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.id"><code class="docutils literal notranslate"><span class="pre">Step.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.log"><code class="docutils literal notranslate"><span class="pre">Step.log</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.log_id"><code class="docutils literal notranslate"><span class="pre">Step.log_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.objects"><code class="docutils literal notranslate"><span class="pre">Step.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.order"><code class="docutils literal notranslate"><span class="pre">Step.order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.performed_by"><code class="docutils literal notranslate"><span class="pre">Step.performed_by</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.performed_by_id"><code class="docutils literal notranslate"><span class="pre">Step.performed_by_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.models.Step.result"><code class="docutils literal notranslate"><span class="pre">Step.result</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-maintenance.views">Views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.views.about"><code class="docutils literal notranslate"><span class="pre">about()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.views.log_create"><code class="docutils literal notranslate"><span class="pre">log_create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.views.log_detail"><code class="docutils literal notranslate"><span class="pre">log_detail()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.views.log_list"><code class="docutils literal notranslate"><span class="pre">log_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.views.signup"><code class="docutils literal notranslate"><span class="pre">signup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-maintenance.forms">Forms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.forms.MaintenanceLogForm"><code class="docutils literal notranslate"><span class="pre">MaintenanceLogForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.MaintenanceLogForm.Meta"><code class="docutils literal notranslate"><span class="pre">MaintenanceLogForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.MaintenanceLogForm.base_fields"><code class="docutils literal notranslate"><span class="pre">MaintenanceLogForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.MaintenanceLogForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">MaintenanceLogForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.MaintenanceLogForm.media"><code class="docutils literal notranslate"><span class="pre">MaintenanceLogForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#maintenance.forms.StepForm"><code class="docutils literal notranslate"><span class="pre">StepForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.StepForm.Meta"><code class="docutils literal notranslate"><span class="pre">StepForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.StepForm.base_fields"><code class="docutils literal notranslate"><span class="pre">StepForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.StepForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">StepForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintenance.forms.StepForm.media"><code class="docutils literal notranslate"><span class="pre">StepForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MaintenaTrack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Maintenance app</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/maintenance.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="maintenance-app">
+<h1>Maintenance app<a class="headerlink" href="#maintenance-app" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This section documents the core Django app: <strong>maintenance</strong>.</p>
+</section>
+<section id="module-maintenance.models">
+<span id="models"></span><h2>Models<a class="headerlink" href="#module-maintenance.models" title="Link to this heading"></a></h2>
+<p>Data models for MaintenaTrack.</p>
+<p>Contains:
+- Equipment: optional asset grouping for logs.
+- MaintenanceLog: core log per incident (zone, alarm, LAM, difficulty, etc.).
+- Step: ordered steps attached to each log.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="maintenance.models.Equipment">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maintenance.models.</span></span><span class="sig-name descname"><span class="pre">Equipment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated_at</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Equipment" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#maintenance.models.Equipment.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#maintenance.models.Equipment.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.Status">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Equipment.Status" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TextChoices</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.Status.ACTIVE">
+<span class="sig-name descname"><span class="pre">ACTIVE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'active'</span></em><a class="headerlink" href="#maintenance.models.Equipment.Status.ACTIVE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.Status.DOWN">
+<span class="sig-name descname"><span class="pre">DOWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'down'</span></em><a class="headerlink" href="#maintenance.models.Equipment.Status.DOWN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.Status.IN_SERVICE">
+<span class="sig-name descname"><span class="pre">IN_SERVICE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'in_service'</span></em><a class="headerlink" href="#maintenance.models.Equipment.Status.IN_SERVICE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.Status.RETIRED">
+<span class="sig-name descname"><span class="pre">RETIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'retired'</span></em><a class="headerlink" href="#maintenance.models.Equipment.Status.RETIRED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.asset_tag">
+<span class="sig-name descname"><span class="pre">asset_tag</span></span><a class="headerlink" href="#maintenance.models.Equipment.asset_tag" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#maintenance.models.Equipment.created_at" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#maintenance.models.Equipment.description" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.get_next_by_created_at">
+<span class="sig-name descname"><span class="pre">get_next_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Equipment.get_next_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.get_next_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_next_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Equipment.get_next_by_updated_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.get_previous_by_created_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Equipment.get_previous_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.get_previous_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Equipment.get_previous_by_updated_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.get_status_display">
+<span class="sig-name descname"><span class="pre">get_status_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">status&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Equipment.get_status_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#maintenance.models.Equipment.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#maintenance.models.Equipment.location" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.logs">
+<span class="sig-name descname"><span class="pre">logs</span></span><a class="headerlink" href="#maintenance.models.Equipment.logs" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#maintenance.models.Equipment.name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#maintenance.models.Equipment.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#maintenance.models.Equipment.status" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><a class="headerlink" href="#maintenance.models.Equipment.updated_at" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Equipment.zone">
+<span class="sig-name descname"><span class="pre">zone</span></span><a class="headerlink" href="#maintenance.models.Equipment.zone" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maintenance.models.</span></span><span class="sig-name descname"><span class="pre">MaintenanceLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>A maintenance/repair log entry tied to a zone, alarm, and (optionally) equipment.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.Difficulty">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Difficulty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog.Difficulty" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TextChoices</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.Difficulty.EASY">
+<span class="sig-name descname"><span class="pre">EASY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Easy'</span></em><a class="headerlink" href="#maintenance.models.MaintenanceLog.Difficulty.EASY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.Difficulty.HARD">
+<span class="sig-name descname"><span class="pre">HARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Hard'</span></em><a class="headerlink" href="#maintenance.models.MaintenanceLog.Difficulty.HARD" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.Difficulty.MEDIUM">
+<span class="sig-name descname"><span class="pre">MEDIUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Medium'</span></em><a class="headerlink" href="#maintenance.models.MaintenanceLog.Difficulty.MEDIUM" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.alarm_code">
+<span class="sig-name descname"><span class="pre">alarm_code</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.alarm_code" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.alarm_name">
+<span class="sig-name descname"><span class="pre">alarm_name</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.alarm_name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog.clean" title="Link to this definition"></a></dt>
+<dd><p>Convenience: if zone is empty but equipment is set, inherit equipment.zone.
+(Your form already requires zone, but this is helpful if you relax validation later.)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.created_at" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.created_by">
+<span class="sig-name descname"><span class="pre">created_by</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.created_by" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.created_by_id">
+<span class="sig-name descname"><span class="pre">created_by_id</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.created_by_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.description" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.difficulty">
+<span class="sig-name descname"><span class="pre">difficulty</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.difficulty" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.equipment">
+<span class="sig-name descname"><span class="pre">equipment</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.equipment" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.equipment_id">
+<span class="sig-name descname"><span class="pre">equipment_id</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.equipment_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.get_difficulty_display">
+<span class="sig-name descname"><span class="pre">get_difficulty_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">difficulty&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog.get_difficulty_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.get_next_by_created_at">
+<span class="sig-name descname"><span class="pre">get_next_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog.get_next_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.get_next_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_next_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog.get_next_by_updated_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.get_previous_by_created_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog.get_previous_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.get_previous_by_updated_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_updated_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">updated_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.MaintenanceLog.get_previous_by_updated_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.lam_checked">
+<span class="sig-name descname"><span class="pre">lam_checked</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.lam_checked" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#maintenance.models.MaintenanceLog.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.steps" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.updated_at" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.MaintenanceLog.zone">
+<span class="sig-name descname"><span class="pre">zone</span></span><a class="headerlink" href="#maintenance.models.MaintenanceLog.zone" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="maintenance.models.Step">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maintenance.models.</span></span><span class="sig-name descname"><span class="pre">Step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_minutes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">performed_by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Step" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="maintenance.models.Step.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#maintenance.models.Step.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="maintenance.models.Step.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#maintenance.models.Step.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.action">
+<span class="sig-name descname"><span class="pre">action</span></span><a class="headerlink" href="#maintenance.models.Step.action" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#maintenance.models.Step.created_at" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.duration_minutes">
+<span class="sig-name descname"><span class="pre">duration_minutes</span></span><a class="headerlink" href="#maintenance.models.Step.duration_minutes" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.Step.get_next_by_created_at">
+<span class="sig-name descname"><span class="pre">get_next_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Step.get_next_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maintenance.models.Step.get_previous_by_created_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.models.Step.get_previous_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#maintenance.models.Step.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.log">
+<span class="sig-name descname"><span class="pre">log</span></span><a class="headerlink" href="#maintenance.models.Step.log" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.log_id">
+<span class="sig-name descname"><span class="pre">log_id</span></span><a class="headerlink" href="#maintenance.models.Step.log_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#maintenance.models.Step.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.order">
+<span class="sig-name descname"><span class="pre">order</span></span><a class="headerlink" href="#maintenance.models.Step.order" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.performed_by">
+<span class="sig-name descname"><span class="pre">performed_by</span></span><a class="headerlink" href="#maintenance.models.Step.performed_by" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.performed_by_id">
+<span class="sig-name descname"><span class="pre">performed_by_id</span></span><a class="headerlink" href="#maintenance.models.Step.performed_by_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.models.Step.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#maintenance.models.Step.result" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-maintenance.views">
+<span id="views"></span><h2>Views<a class="headerlink" href="#module-maintenance.views" title="Link to this heading"></a></h2>
+<p>Views for MaintenaTrack.</p>
+<ul class="simple">
+<li><p>log_list: searchable, paginated list of maintenance logs.</p></li>
+<li><p>log_detail: detail page with steps.</p></li>
+<li><p>log_create: create a log with inline steps (login required).</p></li>
+<li><p>signup: simple user registration.</p></li>
+<li><p>home/about: static pages.</p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="maintenance.views.about">
+<span class="sig-prename descclassname"><span class="pre">maintenance.views.</span></span><span class="sig-name descname"><span class="pre">about</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">HttpResponse</span></span></span><a class="headerlink" href="#maintenance.views.about" title="Link to this definition"></a></dt>
+<dd><p>About page.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maintenance.views.home">
+<span class="sig-prename descclassname"><span class="pre">maintenance.views.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">HttpResponse</span></span></span><a class="headerlink" href="#maintenance.views.home" title="Link to this definition"></a></dt>
+<dd><p>Simple landing page.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maintenance.views.log_create">
+<span class="sig-prename descclassname"><span class="pre">maintenance.views.</span></span><span class="sig-name descname"><span class="pre">log_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">HttpResponse</span></span></span><a class="headerlink" href="#maintenance.views.log_create" title="Link to this definition"></a></dt>
+<dd><p>Create a new maintenance log with inline steps (formset).
+Auto-fills zone from equipment if zone is left blank and equipment has a zone.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maintenance.views.log_detail">
+<span class="sig-prename descclassname"><span class="pre">maintenance.views.</span></span><span class="sig-name descname"><span class="pre">log_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HttpRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">HttpResponse</span></span></span><a class="headerlink" href="#maintenance.views.log_detail" title="Link to this definition"></a></dt>
+<dd><p>Show a single log and its related steps and metadata.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maintenance.views.log_list">
+<span class="sig-prename descclassname"><span class="pre">maintenance.views.</span></span><span class="sig-name descname"><span class="pre">log_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">HttpResponse</span></span></span><a class="headerlink" href="#maintenance.views.log_list" title="Link to this definition"></a></dt>
+<dd><p>List logs with optional filters.</p>
+<dl class="simple">
+<dt>Query params:</dt><dd><ul class="simple">
+<li><p>q: free-text query (matches alarm_code, alarm_name, description, steps text)</p></li>
+<li><p>zone: numeric zone (1–22)</p></li>
+<li><p>difficulty: ‘Easy’ | ‘Medium’ | ‘Hard’</p></li>
+<li><p>page: page number for pagination</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maintenance.views.signup">
+<span class="sig-prename descclassname"><span class="pre">maintenance.views.</span></span><span class="sig-name descname"><span class="pre">signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HttpRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">HttpResponse</span></span></span><a class="headerlink" href="#maintenance.views.signup" title="Link to this definition"></a></dt>
+<dd><p>Register a new user and log them in, then redirect to the log list.</p>
+</dd></dl>
+
+</section>
+<section id="module-maintenance.forms">
+<span id="forms"></span><h2>Forms<a class="headerlink" href="#module-maintenance.forms" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="maintenance.forms.MaintenanceLogForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maintenance.forms.</span></span><span class="sig-name descname"><span class="pre">MaintenanceLogForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.forms.MaintenanceLogForm" title="Link to this definition"></a></dt>
+<dd><dl class="py class">
+<dt class="sig sig-object py" id="maintenance.forms.MaintenanceLogForm.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#maintenance.forms.MaintenanceLogForm.Meta" title="Link to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.MaintenanceLogForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['equipment',</span> <span class="pre">'zone',</span> <span class="pre">'alarm_code',</span> <span class="pre">'alarm_name',</span> <span class="pre">'lam_checked',</span> <span class="pre">'difficulty',</span> <span class="pre">'description']</span></em><a class="headerlink" href="#maintenance.forms.MaintenanceLogForm.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.MaintenanceLogForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#maintenance.forms.MaintenanceLogForm.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#maintenance.models.MaintenanceLog" title="maintenance.models.MaintenanceLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaintenanceLog</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.MaintenanceLogForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alarm_code':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'alarm_name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'difficulty':</span> <span class="pre">&lt;django.forms.fields.TypedChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'equipment':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'lam_checked':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'zone':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#maintenance.forms.MaintenanceLogForm.base_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.MaintenanceLogForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#maintenance.forms.MaintenanceLogForm.declared_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maintenance.forms.MaintenanceLogForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#maintenance.forms.MaintenanceLogForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="maintenance.forms.StepForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maintenance.forms.</span></span><span class="sig-name descname"><span class="pre">StepForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maintenance.forms.StepForm" title="Link to this definition"></a></dt>
+<dd><dl class="py class">
+<dt class="sig sig-object py" id="maintenance.forms.StepForm.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#maintenance.forms.StepForm.Meta" title="Link to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.StepForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['order',</span> <span class="pre">'action',</span> <span class="pre">'result',</span> <span class="pre">'duration_minutes']</span></em><a class="headerlink" href="#maintenance.forms.StepForm.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.StepForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#maintenance.forms.StepForm.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#maintenance.models.Step" title="maintenance.models.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.StepForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'action':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'duration_minutes':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'order':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'result':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#maintenance.forms.StepForm.base_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maintenance.forms.StepForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#maintenance.forms.StepForm.declared_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maintenance.forms.StepForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#maintenance.forms.StepForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to MaintenaTrack’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Luwie.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
