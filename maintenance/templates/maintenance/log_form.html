@@ -1,84 +1,108 @@
 {% extends "base.html" %} {% block content %}
-<h1 class="page-title">
-  {% if is_update %}Edit Maintenance Log{% else %}New Maintenance Log{% endif %}
-</h1>
+<h1 class="page-title">New Maintenance Log</h1>
 
-<form method="post" class="formbox" id="log-form">
+<form method="post" class="formbox">
   {% csrf_token %}
+
+  <!-- Equipment Section -->
+  <div class="fieldset">
+    <h3 style="margin: 0 0 8px 0">
+      Equipment
+      <button
+        type="button"
+        onclick="toggleEquipmentForm()"
+        class="btn btn-link"
+        style="font-size: 0.9em"
+      >
+        + Add New
+      </button>
+    </h3>
+
+    <div class="form-group">
+      <label for="{{ form.equipment.id_for_label }}">Select Equipment:</label>
+      {{ form.equipment }}
+    </div>
+
+    <!-- Quick Add Equipment Form (hidden by default) -->
+    <div
+      id="quick-equipment-form"
+      style="
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+      "
+    >
+      <h4 style="margin: 0 0 10px 0">Quick Add Equipment</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            id="new-equipment-name"
+            placeholder="Equipment name"
+            style="width: 100%"
+          />
+        </div>
+        <div>
+          <label>Zone:</label>
+          <input
+            type="number"
+            id="new-equipment-zone"
+            min="1"
+            max="22"
+            value="1"
+            style="width: 100%"
+          />
+        </div>
+      </div>
+      <div style="margin-top: 10px">
+        <button
+          type="button"
+          onclick="saveQuickEquipment()"
+          class="btn btn-primary"
+        >
+          Add Equipment
+        </button>
+        <button type="button" onclick="toggleEquipmentForm()" class="btn">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="fieldset">
     <h3 style="margin: 0 0 8px 0">Log Details</h3>
 
     <div class="form-group">
-      <label for="{{ form.equipment.id_for_label }}">Equipment</label>
-      {{ form.equipment }}
-      <button type="button" id="add-equipment-btn" class="btn btn-link">
-        + Add
-      </button>
-      {{ form.equipment.errors }}
-    </div>
-
-    <!-- Modal for adding equipment -->
-    <div
-      id="add-equipment-modal"
-      style="
-        display: none;
-        background: #fff;
-        padding: 15px;
-        border: 1px solid #ccc;
-        margin: 10px 0;
-      "
-    >
-      <h3>Add New Equipment</h3>
-      <div id="add-equipment-container">
-        {% csrf_token %}
-        <input
-          type="text"
-          id="new-equipment-name"
-          placeholder="Equipment name"
-          required
-        />
-        <button type="button" id="save-equipment-btn" class="btn btn-primary">
-          Save
-        </button>
-        <button type="button" id="cancel-equipment-btn" class="btn">
-          Cancel
-        </button>
-      </div>
+      <label for="{{ form.zone.id_for_label }}">Zone:</label>
+      {{ form.zone }}
     </div>
 
     <div class="form-group">
-      <label for="{{ form.zone.id_for_label }}">Zone</label>
-      {{ form.zone }} {{ form.zone.errors }}
+      <label for="{{ form.alarm_code.id_for_label }}">Alarm Code:</label>
+      {{ form.alarm_code }}
     </div>
 
     <div class="form-group">
-      <label for="{{ form.alarm_code.id_for_label }}"
-        >Alarm Code <span style="color: #dc3545">*</span></label
-      >
-      {{ form.alarm_code }} {{ form.alarm_code.errors }}
+      <label for="{{ form.alarm_name.id_for_label }}">Alarm Name:</label>
+      {{ form.alarm_name }}
     </div>
 
     <div class="form-group">
-      <label for="{{ form.alarm_name.id_for_label }}">Alarm Name</label>
-      {{ form.alarm_name }} {{ form.alarm_name.errors }}
+      <label for="{{ form.difficulty.id_for_label }}">Difficulty:</label>
+      {{ form.difficulty }}
     </div>
 
     <div class="form-group">
-      <label for="{{ form.difficulty.id_for_label }}">Difficulty</label>
-      {{ form.difficulty }} {{ form.difficulty.errors }}
+      <label for="{{ form.lam_checked.id_for_label }}">LAM Checked:</label>
+      {{ form.lam_checked }}
     </div>
 
     <div class="form-group">
-      <label for="{{ form.lam_checked.id_for_label }}">LAM Checked</label>
-      {{ form.lam_checked }} {{ form.lam_checked.errors }}
-    </div>
-
-    <div class="form-group">
-      <label for="{{ form.description.id_for_label }}"
-        >Description <span style="color: #dc3545">*</span></label
-      >
-      {{ form.description }} {{ form.description.errors }}
+      <label for="{{ form.description.id_for_label }}">Description:</label>
+      {{ form.description }}
     </div>
   </div>
 
@@ -89,100 +113,69 @@
     {% endfor %}
   </div>
 
-  <div class="form-actions">
-    <button class="btn btn-primary" type="submit" id="submit-btn">
-      {% if is_update %}📝 Update Log{% else %}💾 Save Log{% endif %}
-    </button>
-    {% if is_update %}
-    <a class="btn" href="{% url 'maintenance:log_detail' log.pk %}">Cancel</a>
-    {% else %}
+  <div>
+    <button class="btn btn-primary" type="submit">Save Log</button>
     <a class="btn" href="{% url 'maintenance:log_list' %}">Cancel</a>
-    {% endif %}
   </div>
 </form>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("🚀 Save Log form initialized");
+  function toggleEquipmentForm() {
+    const form = document.getElementById("quick-equipment-form");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+  }
 
-    // Get form elements
-    const form = document.getElementById("log-form");
-    const submitBtn = document.getElementById("submit-btn");
-    const originalBtnText = submitBtn.textContent;
+  async function saveQuickEquipment() {
+    const name = document.getElementById("new-equipment-name").value.trim();
+    const zone = document.getElementById("new-equipment-zone").value;
 
-    console.log("Form elements found:", {
-      form: !!form,
-      submitBtn: !!submitBtn,
-    });
-
-    // Form submit handler with visual feedback only (no validation blocking)
-    form.addEventListener("submit", function (e) {
-      console.log("🔥 SAVE BUTTON CLICKED - Form submitting!");
-
-      // Visual feedback
-      submitBtn.disabled = true;
-      submitBtn.textContent = "💾 Saving...";
-      submitBtn.style.opacity = "0.7";
-
-      console.log("✅ Form submitting to server");
-
-      // Let Django handle validation on the backend
-      // Form will submit normally
-    });
-
-    // Equipment modal functionality
-    const modal = document.getElementById("add-equipment-modal");
-    const openBtn = document.getElementById("add-equipment-btn");
-    const cancelBtn = document.getElementById("cancel-equipment-btn");
-    const saveBtn = document.getElementById("save-equipment-btn");
-    const select = document.getElementById("id_equipment");
-    const csrfToken = document.querySelector(
-      "[name=csrfmiddlewaretoken]"
-    ).value;
-
-    if (openBtn) {
-      openBtn.onclick = () => (modal.style.display = "block");
-    }
-    if (cancelBtn) {
-      cancelBtn.onclick = () => (modal.style.display = "none");
+    if (!name) {
+      alert("Please enter equipment name");
+      return;
     }
 
-    if (saveBtn) {
-      saveBtn.onclick = async function () {
-        const name = document.getElementById("new-equipment-name").value.trim();
-        if (!name) return;
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("zone", zone);
 
-        const formData = new FormData();
-        formData.append("name", name);
+      const csrfToken = document.querySelector(
+        "[name=csrfmiddlewaretoken]"
+      ).value;
 
-        try {
-          const response = await fetch(
-            "{% url 'maintenance:add_equipment' %}",
-            {
-              method: "POST",
-              headers: { "X-CSRFToken": csrfToken },
-              body: formData,
-            }
-          );
+      const response = await fetch('{% url "maintenance:add_equipment" %}', {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": csrfToken,
+        },
+        body: formData,
+      });
 
-          if (response.ok) {
-            const newEquipment = await response.json();
-            const option = document.createElement("option");
-            option.value = newEquipment.id;
-            option.text = newEquipment.name;
-            select.add(option);
-            select.value = newEquipment.id;
-            modal.style.display = "none";
-            document.getElementById("new-equipment-name").value = "";
-          }
-        } catch (error) {
-          console.error("Error adding equipment:", error);
-          alert("Error adding equipment. Please try again.");
-        }
-      };
+      if (response.ok) {
+        const equipment = await response.json();
+
+        // Add new option to select
+        const select = document.getElementById(
+          "{{ form.equipment.id_for_label }}"
+        );
+        const option = new Option(equipment.name, equipment.id);
+        select.add(option);
+        select.value = equipment.id;
+
+        // Clear form and hide it
+        document.getElementById("new-equipment-name").value = "";
+        document.getElementById("new-equipment-zone").value = "1";
+        toggleEquipmentForm();
+
+        alert("Equipment added successfully!");
+      } else {
+        const error = await response.json();
+        alert("Error: " + (error.error || "Failed to add equipment"));
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error adding equipment. Please try again.");
     }
-
-    console.log("✅ Save Log form setup complete");
-  });
+  }
 </script>
 {% endblock %}

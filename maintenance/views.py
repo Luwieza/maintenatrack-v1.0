@@ -155,13 +155,21 @@ def log_create(request: HttpRequest) -> HttpResponse:
 def add_equipment(request: HttpRequest) -> HttpResponse:
     """
     AJAX endpoint to create new equipment without admin.
-    Modal only provides 'name', so we auto-fill other required fields.
+    Form provides 'name' and 'zone', we auto-fill other required fields.
     """
     name = request.POST.get("name", "").strip()
+    zone = request.POST.get("zone", "1")
+
     if not name:
         return JsonResponse({"error": "Name is required."}, status=400)
 
-    # Auto-generate defaults for asset_tag & zone
+    try:
+        zone = int(zone)
+        if zone < 1 or zone > 22:
+            return JsonResponse({"error": "Zone must be between 1 and 22."}, status=400)
+    except (ValueError, TypeError):
+        return JsonResponse({"error": "Invalid zone value."}, status=400)
+
     # Generate unique asset tag by finding the highest existing AUTO- number
     import re
     from django.db import IntegrityError
@@ -180,7 +188,7 @@ def add_equipment(request: HttpRequest) -> HttpResponse:
         equipment = Equipment.objects.create(
             name=name,
             asset_tag=f"AUTO-{max_num + 1}",  # unique asset tag
-            zone=1,  # default zone, can be edited later in admin
+            zone=zone,  # use provided zone
             status=Equipment.Status.ACTIVE,
         )
         return JsonResponse({
@@ -191,7 +199,7 @@ def add_equipment(request: HttpRequest) -> HttpResponse:
     except IntegrityError:
         # Equipment with this name and zone already exists
         # Return the existing equipment instead
-        equipment = Equipment.objects.filter(name=name, zone=1).first()
+        equipment = Equipment.objects.filter(name=name, zone=zone).first()
         if equipment:
             return JsonResponse({
                 "id": equipment.id,
