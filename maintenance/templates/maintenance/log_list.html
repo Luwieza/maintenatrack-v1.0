@@ -11,6 +11,12 @@
     <option value="Medium" {% if difficulty == "Medium" %}selected{% endif %}>Medium</option>
     <option value="Hard"   {% if difficulty == "Hard" %}selected{% endif %}>Hard</option>
   </select>
+  {% if user.is_authenticated %}
+  <select name="my_logs" class="input" style="width:140px">
+    <option value="">All logs</option>
+    <option value="true" {% if my_logs == "true" %}selected{% endif %}>My logs only</option>
+  </select>
+  {% endif %}
   <button class="btn btn-primary" type="submit">Filter</button>
 </form>
 
@@ -30,9 +36,21 @@
             <div style="margin-top:6px;color:var(--ink-2)">Equipment: {{ log.equipment.name }} ({{ log.equipment.asset_tag }})</div>
           {% endif %}
         </div>
-        <div style="text-align:right;color:var(--ink-2);font-size:13px">
-          {{ log.created_at|date:"Y-m-d H:i" }}<br>
-          by {{ log.created_by|default:"—" }}
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+          <div style="text-align:right;color:var(--ink-2);font-size:13px">
+            {{ log.created_at|date:"Y-m-d H:i" }}<br>
+            by {{ log.created_by|default:"—" }}
+          </div>
+          {% if user.is_authenticated and log.created_by == user %}
+          <div style="display: flex; gap: 6px;">
+            <a href="{% url 'maintenance:log_update' log.pk %}" class="btn btn-success" style="font-size: 12px; padding: 4px 8px;">
+              Edit
+            </a>
+            <a href="{% url 'maintenance:log_delete' log.pk %}" class="btn btn-danger" style="font-size: 12px; padding: 4px 8px;">
+              Delete
+            </a>
+          </div>
+          {% endif %}
         </div>
       </div>
     </li>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add Equipment</h1>
+
+<form method="post" class="formbox">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Save Equipment</button>
+  <a class="btn" href="{% url 'maintenance:log_create' %}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,28 +1,188 @@
-{% extends "base.html" %}
-{% block content %}
-<h1 class="page-title">New Maintenance Log</h1>
+{% extends "base.html" %} {% block content %}
+<h1 class="page-title">
+  {% if is_update %}Edit Maintenance Log{% else %}New Maintenance Log{% endif %}
+</h1>
 
-<form method="post" class="formbox">
+<form method="post" class="formbox" id="log-form">
   {% csrf_token %}
 
   <div class="fieldset">
-    <h3 style="margin:0 0 8px 0">Log Details</h3>
-    {{ form.as_p }}
+    <h3 style="margin: 0 0 8px 0">Log Details</h3>
+
+    <div class="form-group">
+      <label for="{{ form.equipment.id_for_label }}">Equipment</label>
+      {{ form.equipment }}
+      <button type="button" id="add-equipment-btn" class="btn btn-link">
+        + Add
+      </button>
+      {{ form.equipment.errors }}
+    </div>
+
+    <!-- Modal for adding equipment -->
+    <div
+      id="add-equipment-modal"
+      style="
+        display: none;
+        background: #fff;
+        padding: 15px;
+        border: 1px solid #ccc;
+        margin: 10px 0;
+      "
+    >
+      <h3>Add New Equipment</h3>
+      <div id="add-equipment-container">
+        {% csrf_token %}
+        <input
+          type="text"
+          id="new-equipment-name"
+          placeholder="Equipment name"
+          required
+        />
+        <button type="button" id="save-equipment-btn" class="btn btn-primary">
+          Save
+        </button>
+        <button type="button" id="cancel-equipment-btn" class="btn">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.zone.id_for_label }}">Zone</label>
+      {{ form.zone }} {{ form.zone.errors }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.alarm_code.id_for_label }}"
+        >Alarm Code <span style="color: #dc3545">*</span></label
+      >
+      {{ form.alarm_code }} {{ form.alarm_code.errors }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.alarm_name.id_for_label }}">Alarm Name</label>
+      {{ form.alarm_name }} {{ form.alarm_name.errors }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.difficulty.id_for_label }}">Difficulty</label>
+      {{ form.difficulty }} {{ form.difficulty.errors }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.lam_checked.id_for_label }}">LAM Checked</label>
+      {{ form.lam_checked }} {{ form.lam_checked.errors }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.description.id_for_label }}"
+        >Description <span style="color: #dc3545">*</span></label
+      >
+      {{ form.description }} {{ form.description.errors }}
+    </div>
   </div>
 
   <div class="fieldset">
-    <h3 style="margin:0 0 8px 0">Steps</h3>
-    {{ formset.management_form }}
-    {% for f in formset %}
-      <div class="step">
-        {{ f.as_p }}
-      </div>
+    <h3 style="margin: 0 0 8px 0">Steps</h3>
+    {{ formset.management_form }} {% for f in formset %}
+    <div class="step">{{ f.as_p }}</div>
     {% endfor %}
   </div>
 
-  <div>
-    <button class="btn btn-primary" type="submit">Save Log</button>
+  <div class="form-actions">
+    <button class="btn btn-primary" type="submit" id="submit-btn">
+      {% if is_update %}📝 Update Log{% else %}💾 Save Log{% endif %}
+    </button>
+    {% if is_update %}
+    <a class="btn" href="{% url 'maintenance:log_detail' log.pk %}">Cancel</a>
+    {% else %}
     <a class="btn" href="{% url 'maintenance:log_list' %}">Cancel</a>
+    {% endif %}
   </div>
 </form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("🚀 Save Log form initialized");
+
+    // Get form elements
+    const form = document.getElementById("log-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const originalBtnText = submitBtn.textContent;
+
+    console.log("Form elements found:", {
+      form: !!form,
+      submitBtn: !!submitBtn,
+    });
+
+    // Form submit handler with visual feedback only (no validation blocking)
+    form.addEventListener("submit", function (e) {
+      console.log("🔥 SAVE BUTTON CLICKED - Form submitting!");
+
+      // Visual feedback
+      submitBtn.disabled = true;
+      submitBtn.textContent = "💾 Saving...";
+      submitBtn.style.opacity = "0.7";
+
+      console.log("✅ Form submitting to server");
+
+      // Let Django handle validation on the backend
+      // Form will submit normally
+    });
+
+    // Equipment modal functionality
+    const modal = document.getElementById("add-equipment-modal");
+    const openBtn = document.getElementById("add-equipment-btn");
+    const cancelBtn = document.getElementById("cancel-equipment-btn");
+    const saveBtn = document.getElementById("save-equipment-btn");
+    const select = document.getElementById("id_equipment");
+    const csrfToken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+
+    if (openBtn) {
+      openBtn.onclick = () => (modal.style.display = "block");
+    }
+    if (cancelBtn) {
+      cancelBtn.onclick = () => (modal.style.display = "none");
+    }
+
+    if (saveBtn) {
+      saveBtn.onclick = async function () {
+        const name = document.getElementById("new-equipment-name").value.trim();
+        if (!name) return;
+
+        const formData = new FormData();
+        formData.append("name", name);
+
+        try {
+          const response = await fetch(
+            "{% url 'maintenance:add_equipment' %}",
+            {
+              method: "POST",
+              headers: { "X-CSRFToken": csrfToken },
+              body: formData,
+            }
+          );
+
+          if (response.ok) {
+            const newEquipment = await response.json();
+            const option = document.createElement("option");
+            option.value = newEquipment.id;
+            option.text = newEquipment.name;
+            select.add(option);
+            select.value = newEquipment.id;
+            modal.style.display = "none";
+            document.getElementById("new-equipment-name").value = "";
+          }
+        } catch (error) {
+          console.error("Error adding equipment:", error);
+          alert("Error adding equipment. Please try again.");
+        }
+      };
+    }
+
+    console.log("✅ Save Log form setup complete");
+  });
+</script>
 {% endblock %}

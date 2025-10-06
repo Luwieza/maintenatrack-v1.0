@@ -23,7 +23,9 @@ class Equipment(models.Model):
     asset_tag = models.CharField(
         max_length=64,
         unique=True,
-        help_text="Unique asset identifier",
+        blank=True,
+        null=True,
+        help_text="Unique asset identifier (optional on quick add).",
     )
     zone = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(22)],
@@ -45,13 +47,18 @@ class Equipment(models.Model):
 
     class Meta:
         ordering = ["zone", "name"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name", "zone"], name="unique_equipment_name_per_zone"
+            )
+        ]
         indexes = [
             models.Index(fields=["zone", "status"]),
             models.Index(fields=["name"]),
         ]
 
     def __str__(self) -> str:
-        return f"{self.name} ({self.asset_tag})"
+        return f"{self.name} ({self.asset_tag or 'no-tag'})"
 
 
 # ---------- MaintenanceLog ----------
@@ -63,7 +70,6 @@ class MaintenanceLog(models.Model):
         MEDIUM = "Medium", "Medium"
         HARD = "Hard", "Hard"
 
-    # Equipment is OPTIONAL so users can log without pre-creating assets.
     equipment = models.ForeignKey(
         Equipment,
         null=True,
@@ -83,7 +89,6 @@ class MaintenanceLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # Retain zone at log-time in case equipment moves later.
     zone = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(22)],
         db_index=True,
@@ -118,10 +123,6 @@ class MaintenanceLog(models.Model):
         return f"{equip} | {self.alarm_code} [{self.difficulty}]"
 
     def clean(self):
-        """
-        Convenience: if zone is empty but equipment is set, inherit equipment.zone.
-        (Your form already requires zone, but this is helpful if you relax validation later.)
-        """
         super().clean()
         if not self.zone and self.equipment and self.equipment.zone:
             self.zone = self.equipment.zone

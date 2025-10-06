@@ -5,7 +5,7 @@
     <title>MaintenaTrack</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     {% load static %}
-    <link rel="icon" href="data:,">
+    <link rel="icon" href="data:," />
 
     <style>
       :root {
@@ -15,114 +15,514 @@
         /* Low-glare surface + ink */
         --ink: #111;
         --ink-2: #444;
-        --bg: #f6f7f8;        /* was #fff → softer canvas */
-        --bg-soft: #f2f3f5;   /* soft panels/chips */
-        --line: #e3e5e8;      /* subtler borders */
+        --bg: #f6f7f8; /* was #fff → softer canvas */
+        --bg-soft: #f2f3f5; /* soft panels/chips */
+        --line: #e3e5e8; /* subtler borders */
         --ring: rgba(228, 0, 43, 0.22);
-        --shadow: 0 8px 24px rgba(0,0,0,.06);
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         --radius: 16px;
       }
-      * { box-sizing: border-box; }
-      html, body {
-        margin: 0; padding: 0; background: var(--bg); color: var(--ink);
-        font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg) url("{% static 'maintenance/img/product.png' %}")
+          no-repeat center center fixed;
+        background-size: cover;
+        color: var(--ink);
+        font: 16px/1.45 system-ui, -apple-system, Segoe UI, Ubuntu,
+          "Helvetica Neue", Arial;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
       }
-      a { color: var(--jj-red); text-decoration: none; }
-      a:hover { text-decoration: underline; }
+
+      /* Add overlay to make content readable over background */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(246, 247, 248, 0.85);
+        z-index: -1;
+      }
+      a {
+        color: var(--jj-red);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
 
       /* Top bar */
-      .nav { background: var(--jj-red); color: #fff; position: sticky; top: 0; z-index: 10; }
-      .nav .wrap {
-        max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 16px; padding: 10px 16px;
+      .nav {
+        background: var(--jj-red);
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 10;
       }
-      .brand { font-weight: 800; letter-spacing: .2px; font-size: 18px; }
-      .nav a { color: #fff; opacity: .95; }
-      .nav a:hover { opacity: 1; text-decoration: underline; }
-      .spacer { flex: 1; }
+      .nav .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 10px 16px;
+      }
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        font-size: 18px;
+      }
+      .nav a {
+        color: #fff;
+        opacity: 0.95;
+      }
+      .nav a:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+      .spacer {
+        flex: 1;
+      }
 
       /* Buttons */
-      .btn { display: inline-block; border: 1px solid transparent; padding: 8px 12px; border-radius: 10px; cursor: pointer; }
-      .btn-ghost { border-color: rgba(255,255,255,.35); }
-      .btn-primary { background: #fff; color: var(--jj-red); font-weight: 600; }
+      .btn {
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .btn-ghost {
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+      .btn-primary {
+        background: #fff;
+        color: var(--jj-red);
+        font-weight: 600;
+      }
 
       /* Normalize native <button> + hover (fixes grey pill) */
-      button.btn{
-        background: transparent; border: 1px solid transparent; color: inherit; font: inherit;
-        padding: 8px 12px; border-radius: 10px; cursor: pointer; appearance: none; -webkit-appearance: none;
-        transition: background-color .15s ease, border-color .15s ease, transform .05s ease;
+      button.btn {
+        background: transparent;
+        border: 1px solid transparent;
+        color: inherit;
+        font: inherit;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        transition: background-color 0.15s ease, border-color 0.15s ease,
+          transform 0.05s ease;
       }
-      .nav .btn-ghost{ background: transparent; color:#fff; border-color: rgba(255,255,255,.35); }
-      .nav .btn-ghost:hover{ background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.7); }
-      .btn-primary:hover{ filter: brightness(.96); }
+
+      /* Button hover effects */
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: var(--jj-red);
+        color: #fff;
+        font-weight: 600;
+        border: 1px solid var(--jj-red);
+      }
+
+      .btn-primary:hover {
+        background: #c7002a;
+        border-color: #c7002a;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(228, 0, 43, 0.3);
+      }
+
+      button.btn-primary {
+        background: var(--jj-red);
+        color: #fff;
+        border-color: var(--jj-red);
+      }
+
+      button.btn-primary:hover {
+        background: #c7002a;
+        border-color: #c7002a;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(228, 0, 43, 0.3);
+      }
+
+      button.btn-primary:disabled {
+        background: #ccc !important;
+        color: #666 !important;
+        border-color: #ccc !important;
+        cursor: not-allowed !important;
+        transform: none !important;
+        box-shadow: none !important;
+        opacity: 0.6;
+      }
+
+      .btn-primary:active {
+        background: #a00026 !important;
+        border-color: #a00026 !important;
+        transform: translateY(0px);
+      }
+
+      .btn-loading {
+        position: relative;
+        color: transparent !important;
+      }
+
+      .btn-loading:after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        border: 2px solid #fff;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: button-loading-spinner 1s ease infinite;
+      }
+
+      @keyframes button-loading-spinner {
+        from {
+          transform: rotate(0turn);
+        }
+        to {
+          transform: rotate(1turn);
+        }
+      }
+
+      .nav .btn-ghost {
+        background: transparent;
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+      .nav .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Ensure all navbar buttons have same background as logout */
+      .nav button.btn-ghost,
+      .nav a.btn-ghost {
+        background: transparent;
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+      .nav button.btn-ghost:hover,
+      .nav a.btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.7);
+      }
 
       /* Layout */
-      .container { max-width: 1100px; margin: 28px auto; padding: 0 16px; }
-      .page-title { font-size: 28px; margin: 0 0 16px 0; letter-spacing: .3px; }
-      .center-card{ max-width: 760px; margin: 0 auto; }
+      .container {
+        max-width: 1100px;
+        margin: 28px auto;
+        padding: 0 16px;
+      }
+      .page-title {
+        font-size: 32px;
+        margin: 0 0 20px 0;
+        letter-spacing: 0.3px;
+        color: var(--ink);
+        font-weight: 700;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 16px 20px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        display: inline-block;
+        min-width: 300px;
+      }
+      .center-card {
+        max-width: 760px;
+        margin: 0 auto;
+      }
 
       /* Cards & list */
       .card {
-        background:#fff; border:1px solid var(--line); border-radius: var(--radius);
-        box-shadow: var(--shadow); padding:18px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 18px;
       }
-      .list { display:grid; gap:14px; }
+      .list {
+        display: grid;
+        gap: 14px;
+      }
       .empty {
-        padding:18px; border:1px dashed var(--line); border-radius: var(--radius);
+        padding: 18px;
+        border: 1px dashed var(--line);
+        border-radius: var(--radius);
         background: var(--bg-soft);
       }
 
       /* Filters / Forms */
-      .filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:12px 0 18px; }
-      input, select, textarea {
-        border:1px solid var(--line); border-radius:10px; padding:8px 10px; outline:none; background:#fff; min-height:38px;
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin: 12px 0 18px;
       }
-      input:focus, select:focus, textarea:focus { box-shadow:0 0 0 4px var(--ring); border-color: var(--jj-red); }
+      input,
+      select,
+      textarea {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 8px 10px;
+        outline: none;
+        background: #fff;
+        min-height: 38px;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        box-shadow: 0 0 0 4px var(--ring);
+        border-color: var(--jj-red);
+      }
 
-      label { font-size:12px; color:var(--ink-2); }
-      .chip { display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid var(--line); background: var(--bg-soft); font-size:12px; color:var(--ink-2); }
+      label {
+        font-size: 12px;
+        color: var(--ink-2);
+      }
+      .chip {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--bg-soft);
+        font-size: 12px;
+        color: var(--ink-2);
+      }
 
       /* Form sections */
-      .formbox { display:grid; gap:12px; }
-      .fieldset { background:#fff; border:1px solid var(--line); border-radius: var(--radius); padding:16px; }
-      .stepset { display:grid; gap:10px; }
-      .step { border:1px solid var(--line); border-radius:12px; padding:12px; background:#fff; }
+      .formbox {
+        display: grid;
+        gap: 12px;
+      }
+      .fieldset {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 16px;
+      }
+      .stepset {
+        display: grid;
+        gap: 10px;
+      }
+      .step {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: #fff;
+      }
+      .form-group {
+        margin-bottom: 12px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 4px;
+        font-weight: 500;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      /* Form actions */
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
 
       /* Django error list */
-      .errorlist{ color: var(--jj-red); margin: 0 0 8px 0; padding: 0; list-style: none; }
+      .errorlist {
+        color: var(--jj-red);
+        margin: 0 0 8px 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* Action buttons */
+      .btn-success {
+        background: #28a745;
+        color: #fff;
+        border-color: #28a745;
+      }
+
+      .btn-success:hover {
+        background: #218838;
+        border-color: #218838;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      }
+
+      .btn-danger {
+        background: #dc3545;
+        color: #fff;
+        border-color: #dc3545;
+      }
+
+      .btn-danger:hover {
+        background: #c82333;
+        border-color: #c82333;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+      }
+
+      .btn-secondary {
+        background: var(--jj-red); /* Johnson & Johnson red: #e4002b */
+        color: #fff; /* White text */
+        border: 1px solid var(--jj-red); /* Red border matching background */
+      }
+
+      .btn-secondary:hover {
+        background: #c7002a; /* Darker red on hover */
+        border-color: #c7002a; /* Darker red border on hover */
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(228, 0, 43, 0.3);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink-2);
+        border-color: var(--line);
+      }
+
+      .btn-ghost:hover {
+        background: var(--bg-soft);
+        border-color: var(--ink-2);
+        color: var(--ink);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Messages */
+      .messages {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        z-index: 1000;
+        max-width: 400px;
+      }
+
+      .message {
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        animation: slideInRight 0.3s ease-out;
+      }
+
+      .message.success {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+
+      .message.error {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+
+      .message.warning {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        color: #856404;
+      }
+
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
 
       /* Footer */
-      footer { color:#777; font-size:13px; text-align:center; margin:36px 0 18px; }
+      footer {
+        color: #777;
+        font-size: 13px;
+        text-align: center;
+        margin: 36px 0 18px;
+      }
     </style>
   </head>
   <body>
     <!-- ─────────────── NAVBAR ─────────────── -->
     <header class="nav">
       <div class="wrap">
-        <a class="brand" href="{% url 'maintenance:log_list' %}">MaintenaTrack</a>
-        <a href="{% url 'maintenance:log_list' %}">Logs</a>
+        <a class="brand" href="{% url 'maintenance:log_list' %}"
+          >MaintenaTrack</a
+        >
+        <a href="{% url 'maintenance:log_list' %}" class="btn btn-ghost"
+          >All Logs</a
+        >
         {% if user.is_authenticated %}
-          <a href="{% url 'maintenance:log_create' %}">New Log</a>
-          <div class="spacer"></div>
-          <!-- Logout via POST → redirect to login -->
-          <form method="post" action="{% url 'logout' %}" style="display:inline">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{% url 'login' %}">
-            <button type="submit" class="btn btn-ghost">Logout</button>
-          </form>
+        <a
+          href="{% url 'maintenance:log_list' %}?my_logs=true"
+          class="btn btn-ghost"
+          >My Logs</a
+        >
+        <a href="{% url 'maintenance:log_create' %}" class="btn btn-ghost"
+          >+ New Log</a
+        >
+        <div class="spacer"></div>
+        <!-- Logout via POST → redirect to login -->
+        <form method="post" action="{% url 'logout' %}" style="display: inline">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'login' %}" />
+          <button type="submit" class="btn btn-ghost">Logout</button>
+        </form>
         {% else %}
-          <div class="spacer"></div>
-          <a href="{% url 'login' %}" class="btn btn-ghost">Login</a>
-          <a href="{% url 'maintenance:signup' %}" class="btn btn-ghost">Sign up</a>
+        <div class="spacer"></div>
+        <a href="{% url 'login' %}" class="btn btn-ghost">Login</a>
+        <a href="{% url 'maintenance:signup' %}" class="btn btn-ghost"
+          >Sign up</a
+        >
         {% endif %}
       </div>
     </header>
     <!-- ───────────── END NAVBAR ───────────── -->
 
-    <main class="container">
-      {% block content %}{% endblock %}
-    </main>
+    <!-- Messages -->
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="message {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <main class="container">{% block content %}{% endblock %}</main>
 
     <footer>© {% now "Y" %} MaintenaTrack — Maintenance Knowledge Base</footer>
   </body>
