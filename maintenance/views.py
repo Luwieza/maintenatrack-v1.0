@@ -46,6 +46,11 @@ def log_list(request: HttpRequest) -> HttpResponse:
             | Q(description__icontains=q)
             | Q(steps__action__icontains=q)
             | Q(steps__result__icontains=q)
+            | Q(equipment__name__icontains=q)
+            | Q(equipment__asset_tag__icontains=q)
+            | Q(created_by__username__icontains=q)
+            | Q(created_by__first_name__icontains=q)
+            | Q(created_by__last_name__icontains=q)
         ).distinct()
 
     if zone.isdigit():

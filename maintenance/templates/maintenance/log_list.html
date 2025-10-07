@@ -3,22 +3,42 @@
 <h1 class="page-title">Maintenance Logs</h1>
 
 <form method="get" class="filters card" style="gap:12px">
-  <input class="input" type="text" name="q" value="{{ q }}" placeholder="Search alarm/keyword…" />
-  <input class="input" type="number" name="zone" min="1" max="22" value="{{ zone }}" placeholder="Zone (1–22)" style="width:120px" />
-  <select name="difficulty" class="input" style="width:170px">
-    <option value="">Any difficulty</option>
-    <option value="Easy"   {% if difficulty == "Easy" %}selected{% endif %}>Easy</option>
-    <option value="Medium" {% if difficulty == "Medium" %}selected{% endif %}>Medium</option>
-    <option value="Hard"   {% if difficulty == "Hard" %}selected{% endif %}>Hard</option>
-  </select>
-  {% if user.is_authenticated %}
-  <select name="my_logs" class="input" style="width:140px">
-    <option value="">All logs</option>
-    <option value="true" {% if my_logs == "true" %}selected{% endif %}>My logs only</option>
-  </select>
+  <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+    <input class="input" type="text" name="q" value="{{ q }}" placeholder="🔍 Search all logs (alarm, description, steps, equipment, user)..." style="min-width: 300px; flex: 1;" />
+    <input class="input" type="number" name="zone" min="1" max="22" value="{{ zone }}" placeholder="Zone (1–22)" style="width:120px" />
+    <select name="difficulty" class="input" style="width:170px">
+      <option value="">Any difficulty</option>
+      <option value="Easy"   {% if difficulty == "Easy" %}selected{% endif %}>Easy</option>
+      <option value="Medium" {% if difficulty == "Medium" %}selected{% endif %}>Medium</option>
+      <option value="Hard"   {% if difficulty == "Hard" %}selected{% endif %}>Hard</option>
+    </select>
+    {% if user.is_authenticated %}
+    <select name="my_logs" class="input" style="width:140px">
+      <option value="">🌐 All users</option>
+      <option value="true" {% if my_logs == "true" %}selected{% endif %}>👤 My logs only</option>
+    </select>
+    {% endif %}
+    <button class="btn btn-primary" type="submit">🔍 Search</button>
+  </div>
+  {% if q or zone or difficulty or my_logs %}
+  <div style="margin-top: 8px; font-size: 14px; color: var(--ink-2);">
+    <strong>Searching:</strong>
+    {% if not my_logs %}All users' logs{% else %}Your logs only{% endif %}
+    {% if q %} • Keyword: "{{ q }}"{% endif %}
+    {% if zone %} • Zone: {{ zone }}{% endif %}
+    {% if difficulty %} • Difficulty: {{ difficulty }}{% endif %}
+    <a href="{% url 'maintenance:log_list' %}" style="margin-left: 10px; color: var(--jj-red);">Clear all filters</a>
+  </div>
   {% endif %}
-  <button class="btn btn-primary" type="submit">Filter</button>
 </form>
+
+{% if q or zone or difficulty or my_logs %}
+<div style="margin: 20px 0; padding: 10px; background: var(--bg-soft); border-radius: 8px;">
+  <strong>{{ page_obj.paginator.count }}</strong> log{{ page_obj.paginator.count|pluralize }} found
+  {% if q %}matching "{{ q }}"{% endif %}
+  {% if not my_logs %} from <strong>all users</strong>{% else %} from <strong>your logs</strong>{% endif %}
+</div>
+{% endif %}
 
 <ul class="list">
   {% for log in logs %}
