@@ -19,6 +19,14 @@ from django.db.models import Q
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
+try:
+    from django_ratelimit.decorators import ratelimit
+except ImportError:
+    # Fallback if django-ratelimit is not installed
+    def ratelimit(*args, **kwargs):
+        def decorator(func):
+            return func
+        return decorator
 
 from .forms import MaintenanceLogForm, StepFormSet
 from .models import MaintenanceLog, Equipment
@@ -88,6 +96,7 @@ def log_detail(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "maintenance/log_detail.html", {"log": log})
 
 
+@ratelimit(key='user', rate='10/m', method='POST', block=True)
 @login_required
 @require_http_methods(["GET", "POST"])
 def log_create(request: HttpRequest) -> HttpResponse:
@@ -218,6 +227,7 @@ def add_equipment(request: HttpRequest) -> HttpResponse:
             }, status=400)
 
 
+@ratelimit(key='ip', rate='5/m', method='POST', block=True)
 @require_http_methods(["GET", "POST"])
 def signup(request: HttpRequest) -> HttpResponse:
     """Register a new user and log them in, then redirect to the log list."""
