@@ -5,46 +5,13 @@
 MaintenaTrack is a Django 5.2 web application designed for **industrial maintenance operations** in multi-zone facilities. Built for technicians and maintenance teams to log, track, and analyze equipment maintenance activities with precision and efficiency.
 
 <div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="images/tracker-optimized.png" alt="MaintenaTrack Interface" width="600" style="max-width: 100%; height: auto;"/>
-        <br/>
-        <em>MaintenaTrack - Professional Equipment Maintenance Tracking</em>
-      </td>
-    </tr>
-  </table>
-</div>
 
-<br/>
+![MaintenaTrack Interface](images/tracker-optimized.png)
 
-<div align="center">
-  <h3>📱 Multi-Device Experience</h3>
-  <table>
-    <tr>
-      <td align="center" width="33%">
-        <img src="images/tracker-optimized.png" alt="Desktop View" width="200" height="120" style="object-fit: cover; border: 1px solid #ddd; border-radius: 8px;"/>
-        <br/>
-        <strong>🖥️ Desktop</strong>
-        <br/>
-        <small>Full dashboard & analytics</small>
-      </td>
-      <td align="center" width="33%">
-        <img src="images/tracker-optimized.png" alt="Tablet View" width="150" height="120" style="object-fit: cover; border: 1px solid #ddd; border-radius: 8px;"/>
-        <br/>
-        <strong>📱 Tablet</strong>
-        <br/>
-        <small>Field-optimized workflow</small>
-      </td>
-      <td align="center" width="33%">
-        <img src="images/tracker-optimized.png" alt="Mobile View" width="80" height="120" style="object-fit: cover; border: 1px solid #ddd; border-radius: 8px;"/>
-        <br/>
-        <strong>📱 Mobile</strong>
-        <br/>
-        <small>Quick log entry</small>
-      </td>
-    </tr>
-  </table>
+**🚀 MaintenaTrack - Professional Equipment Maintenance Tracking**
+
+*Access from any device: Desktop, Tablet, or Mobile*
+
 </div>
 
 ---
