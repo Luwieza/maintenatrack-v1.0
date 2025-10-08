@@ -6,11 +6,11 @@ MaintenaTrack is a Django 5.2 web application designed for **industrial maintena
 
 <div align="center">
 
-![MaintenaTrack Interface](images/tracker-optimized.png)
+![MaintenaTrack Interface](image/tracker-optimized.png)
 
 **🚀 MaintenaTrack - Professional Equipment Maintenance Tracking**
 
-*Seamlessly works across Desktop, Tablet, and Mobile devices with responsive design*
+_Seamlessly works across Desktop, Tablet, and Mobile devices with responsive design_
 
 </div>
 
