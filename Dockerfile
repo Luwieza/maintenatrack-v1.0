@@ -24,8 +24,8 @@ COPY . /app/
 RUN mkdir -p /app/staticfiles && \
     python manage.py collectstatic --noinput || true
 
-# Expose port (Railway uses dynamic PORT)
-EXPOSE $PORT
+# Expose port (Railway will map dynamically)
+EXPOSE 8000
 
 # Copy startup script
 COPY start.sh /app/start.sh

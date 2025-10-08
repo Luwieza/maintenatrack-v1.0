@@ -22,6 +22,10 @@ else:
     print('ℹ️  Superuser already exists')
 " || echo "⚠️  Superuser creation skipped"
 
+# Debug environment
+echo "🔍 PORT environment variable: ${PORT:-'not set, using 8000'}"
+echo "🔍 Django settings: ${DJANGO_SETTINGS_MODULE:-'not set'}"
+
 # Start Gunicorn
 echo "🌐 Starting Gunicorn server on port ${PORT:-8000}..."
 exec gunicorn maintenatrack.wsgi:application \
