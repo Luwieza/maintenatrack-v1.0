@@ -22,6 +22,7 @@
     "grayscale",
     "gunicorn",
     "headerlink",
+    "HSTS",
     "iniconfig",
     "inlineformset",
     "isort",
