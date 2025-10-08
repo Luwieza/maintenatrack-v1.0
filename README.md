@@ -4,13 +4,19 @@
 
 MaintenaTrack is a Django 5.2 web application designed for **industrial maintenance operations** in multi-zone facilities. Built for technicians and maintenance teams to log, track, and analyze equipment maintenance activities with precision and efficiency.
 
-<div align="center">
+<p align="center">
+  <img src="images/desktop-view.png" alt="Desktop View" width="45%" />
+  <img src="images/mobile-view.png" alt="Mobile View" width="25%" />
+  <img src="images/tablet-view.png" alt="Tablet View" width="30%" />
+</p>
 
-<img src="images/tracker.png" alt="MaintenaTrack Interface" width="800">
+<p align="center">
+  <em>Responsive design: Desktop, Mobile, and Tablet views of MaintenaTrack</em>
+</p>
 
-_Access MaintenaTrack on any device - Desktop, Tablet, or Mobile_
-
-</div>
+<p align="center">
+  <img src="images/demo.gif" alt="App Demo" width="70%" style="border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.2);" />
+</p>
 
 ---
 
