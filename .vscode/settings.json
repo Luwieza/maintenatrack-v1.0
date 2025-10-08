@@ -8,6 +8,7 @@
     "bodywrapper",
     "collectstatic",
     "contentinfo",
+    "createsuperuser",
     "csrfmiddlewaretoken",
     "cusbc",
     "doctools",
