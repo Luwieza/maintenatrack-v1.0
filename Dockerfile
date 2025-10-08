@@ -24,9 +24,12 @@ COPY . /app/
 RUN mkdir -p /app/staticfiles && \
     python manage.py collectstatic --noinput || true
 
-# Expose port
-EXPOSE 8000
+# Expose port (Railway uses dynamic PORT)
+EXPOSE $PORT
 
-# Default command (SQLite is fine)
-# NOTE: for local testing you can also run "python manage.py runserver 0.0.0.0:8000"
-CMD ["gunicorn", "maintenatrack.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Copy startup script
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# Use startup script as default command
+CMD ["/app/start.sh"]
