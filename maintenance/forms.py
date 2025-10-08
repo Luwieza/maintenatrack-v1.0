@@ -14,6 +14,23 @@ class EquipmentForm(forms.ModelForm):
             "description": forms.Textarea(attrs={"rows": 2}),
         }
 
+    def clean_zone(self):
+        """Validate and sanitize zone input for equipment"""
+        zone = self.cleaned_data.get('zone', '').strip()
+        if not zone:
+            raise forms.ValidationError("Zone is required.")
+
+        # Remove potentially harmful characters but allow alphanumeric, dash, underscore
+        import re
+        zone = re.sub(r'[^\w\-\_]', '', zone)
+
+        if len(zone) > 10:
+            raise forms.ValidationError("Zone must be 10 characters or less.")
+        if len(zone) == 0:
+            raise forms.ValidationError("Zone cannot be empty after cleaning.")
+
+        return zone.upper()
+
 
 class MaintenanceLogForm(forms.ModelForm):
     class Meta:
@@ -35,11 +52,21 @@ class MaintenanceLogForm(forms.ModelForm):
         return alarm_code.upper()
 
     def clean_zone(self):
-        """Validate zone is within allowed range"""
-        zone = self.cleaned_data.get('zone')
-        if zone is not None and (zone < 1 or zone > 22):
-            raise forms.ValidationError("Zone must be between 1 and 22.")
-        return zone
+        """Validate and sanitize zone input"""
+        zone = self.cleaned_data.get('zone', '').strip()
+        if not zone:
+            raise forms.ValidationError("Zone is required.")
+
+        # Remove potentially harmful characters but allow alphanumeric, dash, underscore
+        import re
+        zone = re.sub(r'[^\w\-\_]', '', zone)
+
+        if len(zone) > 10:
+            raise forms.ValidationError("Zone must be 10 characters or less.")
+        if len(zone) == 0:
+            raise forms.ValidationError("Zone cannot be empty after cleaning.")
+
+        return zone.upper()
 
 
 class StepForm(forms.ModelForm):

@@ -27,10 +27,10 @@ class Equipment(models.Model):
         null=True,
         help_text="Unique asset identifier (optional on quick add).",
     )
-    zone = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(22)],
+    zone = models.CharField(
+        max_length=10,
         db_index=True,
-        help_text="Default/primary zone for this equipment (1–22).",
+        help_text="Zone identifier for this equipment (e.g., '1', 'A1', 'Zone-5').",
     )
     location = models.CharField(
         max_length=120, blank=True, help_text="Line/Cell/Bay")
@@ -89,13 +89,17 @@ class MaintenanceLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    zone = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(22)],
+    zone = models.CharField(
+        max_length=10,
         db_index=True,
-        help_text="Physical Zone/Cell where the issue occurred (1–22).",
+        help_text="Zone identifier where the issue occurred (e.g., '1', 'A1', 'Zone-5').",
     )
 
-    alarm_code = models.CharField(max_length=50, db_index=True)
+    alarm_code = models.CharField(
+        max_length=50,
+        db_index=True,
+        help_text="Alarm code - accepts numbers, letters, or mixed (e.g., '123', 'ALM-456', 'A1B2')."
+    )
     alarm_name = models.CharField(max_length=150, blank=True)
     lam_checked = models.BooleanField(
         default=False,
@@ -123,9 +127,22 @@ class MaintenanceLog(models.Model):
         return f"{equip} | {self.alarm_code} [{self.difficulty}]"
 
     def clean(self):
+        from django.core.exceptions import ValidationError
         super().clean()
+
+        # Auto-inherit zone from equipment if not provided
         if not self.zone and self.equipment and self.equipment.zone:
             self.zone = self.equipment.zone
+
+        # Validate zone is not empty
+        if not self.zone or not str(self.zone).strip():
+            raise ValidationError(
+                {'zone': 'Zone is required and cannot be empty.'})
+
+        # Validate zone length
+        if len(str(self.zone).strip()) > 10:
+            raise ValidationError(
+                {'zone': 'Zone identifier must be 10 characters or less.'})
 
 
 # ---------- Step ----------

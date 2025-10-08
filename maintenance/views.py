@@ -61,8 +61,9 @@ def log_list(request: HttpRequest) -> HttpResponse:
             | Q(created_by__last_name__icontains=q)
         ).distinct()
 
-    if zone.isdigit():
-        qs = qs.filter(zone=int(zone))
+    if zone:
+        # Zone is now a CharField, so filter by exact match (case-insensitive)
+        qs = qs.filter(zone__iexact=zone)
 
     if diff:
         qs = qs.filter(difficulty=diff)
@@ -172,17 +173,23 @@ def add_equipment(request: HttpRequest) -> HttpResponse:
     Form provides 'name' and 'zone', we auto-fill other required fields.
     """
     name = request.POST.get("name", "").strip()
-    zone = request.POST.get("zone", "1")
+    zone = request.POST.get("zone", "1").strip()
 
     if not name:
         return JsonResponse({"error": "Name is required."}, status=400)
 
-    try:
-        zone = int(zone)
-        if zone < 1 or zone > 22:
-            return JsonResponse({"error": "Zone must be between 1 and 22."}, status=400)
-    except (ValueError, TypeError):
-        return JsonResponse({"error": "Invalid zone value."}, status=400)
+    if not zone:
+        return JsonResponse({"error": "Zone is required."}, status=400)
+
+    # Validate and sanitize zone
+    import re
+    zone = re.sub(r'[^\w\-\_]', '', zone)
+    if len(zone) > 10:
+        return JsonResponse({"error": "Zone must be 10 characters or less."}, status=400)
+    if len(zone) == 0:
+        return JsonResponse({"error": "Zone cannot be empty."}, status=400)
+
+    zone = zone.upper()  # Normalize to uppercase
 
     # Generate unique asset tag by finding the highest existing AUTO- number
     import re
