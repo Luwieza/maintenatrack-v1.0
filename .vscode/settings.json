@@ -60,6 +60,7 @@
     "toctryesee",
     "undoc",
     "venv",
-    "whitenoise"
+    "whitenoise",
+    "yourdomain"
   ]
 }
