@@ -4,19 +4,48 @@
 
 MaintenaTrack is a Django 5.2 web application designed for **industrial maintenance operations** in multi-zone facilities. Built for technicians and maintenance teams to log, track, and analyze equipment maintenance activities with precision and efficiency.
 
-<p align="center">
-  <img src="images/desktop-view.png" alt="Desktop View" width="45%" />
-  <img src="images/mobile-view.png" alt="Mobile View" width="25%" />
-  <img src="images/tablet-view.png" alt="Tablet View" width="30%" />
-</p>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="images/tracker-optimized.png" alt="MaintenaTrack Interface" width="600" style="max-width: 100%; height: auto;"/>
+        <br/>
+        <em>MaintenaTrack - Professional Equipment Maintenance Tracking</em>
+      </td>
+    </tr>
+  </table>
+</div>
 
-<p align="center">
-  <em>Responsive design: Desktop, Mobile, and Tablet views of MaintenaTrack</em>
-</p>
+<br/>
 
-<p align="center">
-  <img src="images/demo.gif" alt="App Demo" width="70%" style="border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.2);" />
-</p>
+<div align="center">
+  <h3>📱 Multi-Device Experience</h3>
+  <table>
+    <tr>
+      <td align="center" width="33%">
+        <img src="images/tracker-optimized.png" alt="Desktop View" width="200" height="120" style="object-fit: cover; border: 1px solid #ddd; border-radius: 8px;"/>
+        <br/>
+        <strong>🖥️ Desktop</strong>
+        <br/>
+        <small>Full dashboard & analytics</small>
+      </td>
+      <td align="center" width="33%">
+        <img src="images/tracker-optimized.png" alt="Tablet View" width="150" height="120" style="object-fit: cover; border: 1px solid #ddd; border-radius: 8px;"/>
+        <br/>
+        <strong>📱 Tablet</strong>
+        <br/>
+        <small>Field-optimized workflow</small>
+      </td>
+      <td align="center" width="33%">
+        <img src="images/tracker-optimized.png" alt="Mobile View" width="80" height="120" style="object-fit: cover; border: 1px solid #ddd; border-radius: 8px;"/>
+        <br/>
+        <strong>📱 Mobile</strong>
+        <br/>
+        <small>Quick log entry</small>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
