@@ -35,11 +35,13 @@
     "jquery",
     "kfeu",
     "labelledby",
+    "logfile",
     "maintenatrack",
     "mdash",
     "modindex",
     "mypy",
     "Neue",
+    "noinput",
     "onclick",
     "onsubmit",
     "pathspec",
@@ -48,6 +50,8 @@
     "pycache",
     "pygments",
     "pytest",
+    "PYTHONDONTWRITEBYTECODE",
+    "PYTHONUNBUFFERED",
     "queryset",
     "Roboto",
     "runserver",
@@ -65,6 +69,7 @@
     "undoc",
     "venv",
     "whitenoise",
+    "wsgi",
     "yourdomain"
   ]
 }

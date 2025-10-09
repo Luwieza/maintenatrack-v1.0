@@ -25,25 +25,6 @@ else:
 # Debug environment
 echo "🔍 PORT environment variable: ${PORT:-'not set, using 8000'}"
 echo "🔍 Django settings: ${DJANGO_SETTINGS_MODULE:-'not set'}"
-echo "🔍 Railway environment: ${RAILWAY_ENVIRONMENT:-'not set'}"
-echo "🔍 DEBUG setting: ${DEBUG:-'not set'}"
-
-# Test Django configuration
-echo "🧪 Testing Django configuration..."
-python manage.py check --deploy || echo "⚠️  Django check failed"
-
-# Show allowed hosts
-echo "🌐 Testing ALLOWED_HOSTS configuration..."
-python -c "
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'maintenatrack.settings')
-import django
-django.setup()
-from django.conf import settings
-print('✅ ALLOWED_HOSTS:', settings.ALLOWED_HOSTS)
-print('✅ DEBUG:', settings.DEBUG)
-print('✅ SECRET_KEY present:', bool(settings.SECRET_KEY))
-"
 
 # Start Gunicorn
 echo "🌐 Starting Gunicorn server on port ${PORT:-8000}..."

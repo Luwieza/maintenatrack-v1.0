@@ -33,7 +33,4 @@ urlpatterns = [
     path("equipment/<int:pk>/delete/",
          views.equipment_delete, name="equipment_delete"),
 
-    # Debug/Test
-    path("test/", views.test_railway, name="test_railway"),
-
 ]
