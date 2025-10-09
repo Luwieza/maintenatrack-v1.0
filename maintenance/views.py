@@ -388,6 +388,12 @@ def equipment_delete(request: HttpRequest, pk: int) -> HttpResponse:
             request, "Cannot delete equipment that other users have logged with.")
         return redirect("maintenance:log_list")
 
+
+@require_http_methods(["GET"])
+def health_check(request: HttpRequest) -> HttpResponse:
+    """Simple health check endpoint for Railway."""
+    return HttpResponse("OK", content_type='text/plain')
+
     equipment.delete()
     messages.success(
         request, f"Equipment '{equipment.name}' deleted successfully.")

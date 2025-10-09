@@ -33,4 +33,7 @@ urlpatterns = [
     path("equipment/<int:pk>/delete/",
          views.equipment_delete, name="equipment_delete"),
 
+    # Health check for Railway
+    path("health/", views.health_check, name="health_check"),
+
 ]
