@@ -392,3 +392,29 @@ def equipment_delete(request: HttpRequest, pk: int) -> HttpResponse:
     messages.success(
         request, f"Equipment '{equipment.name}' deleted successfully.")
     return redirect("maintenance:log_list")
+
+
+def test_railway(request: HttpRequest) -> HttpResponse:
+    """Simple test endpoint to verify Railway deployment works."""
+    import os
+    import sys
+    from django.conf import settings
+    
+    debug_info = {
+        'status': 'Django is working!',
+        'python_version': sys.version,
+        'allowed_hosts': settings.ALLOWED_HOSTS,
+        'debug': settings.DEBUG,
+        'railway_env': os.environ.get('RAILWAY_ENVIRONMENT', 'Not set'),
+        'port': os.environ.get('PORT', 'Not set'),
+        'request_host': request.get_host(),
+        'request_method': request.method,
+        'request_path': request.path,
+    }
+    
+    # Return as plain text for easy reading
+    response_text = "MaintenaTrack Railway Test\n" + "="*30 + "\n"
+    for key, value in debug_info.items():
+        response_text += f"{key}: {value}\n"
+    
+    return HttpResponse(response_text, content_type='text/plain')
