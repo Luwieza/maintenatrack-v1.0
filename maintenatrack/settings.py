@@ -15,10 +15,10 @@ SECRET_KEY = "django-insecure-nr8lno-f=^olf^cusbc37wga$+m2n#*!kfeu6_vd9m7i(76+_5
 DEBUG = os.environ.get('DEBUG', 'True').lower() in ['true', '1', 'yes']
 
 # Allow Railway domains and local development
-# For Railway deployment, allow all hosts temporarily to debug
-if os.environ.get('RAILWAY_ENVIRONMENT'):
+# Railway always sets PORT env var, use that to detect Railway deployment
+if os.environ.get('PORT'):  # Railway deployment
     ALLOWED_HOSTS = ['*']  # Allow all hosts on Railway
-else:
+else:  # Local development
     ALLOWED_HOSTS = [
         '127.0.0.1', 
         'localhost', 
@@ -44,7 +44,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    # "django.middleware.csrf.CsrfViewMiddleware",  # Temporarily disabled for debugging
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
