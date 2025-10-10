@@ -12,16 +12,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-nr8lno-f=^olf^cusbc37wga$+m2n#*!kfeu6_vd9m7i(76+_5"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1', 'yes']
 
-# Simple ALLOWED_HOSTS that should work for Railway
+# Production and development hosts
 ALLOWED_HOSTS = [
-    '127.0.0.1', 
-    'localhost', 
-    'testserver',
-    'web-production-de7a8.up.railway.app',
-    '.railway.app',
-    '*'  # Allow all for Railway debugging
+    'maintenatrack.com',
+    'www.maintenatrack.com',
+    'confident-vibrancy-production.up.railway.app',
+    '127.0.0.1',
+    'localhost'
 ]
 
 
