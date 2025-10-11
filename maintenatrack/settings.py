@@ -1,3 +1,4 @@
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -70,7 +71,6 @@ WSGI_APPLICATION = "maintenatrack.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-import dj_database_url
 
 # Use PostgreSQL if DATABASE_URL is provided (Railway), otherwise SQLite for development
 DATABASE_URL = os.environ.get('DATABASE_URL')

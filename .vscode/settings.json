@@ -47,6 +47,7 @@
     "pathspec",
     "platformdirs",
     "pluggy",
+    "psycopg",
     "pycache",
     "pygments",
     "pytest",
