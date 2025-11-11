@@ -1,0 +1,19 @@
+[phases.setup]
+nixPkgs = ["python3", "pip"]
+
+[phases.install]
+cmds = [
+    "pip install --upgrade pip",
+    "pip install -r requirements.txt"
+]
+
+[phases.build]
+cmds = [
+    "DJANGO_SETTINGS_MODULE=maintenatrack.settings_prod python manage.py collectstatic --noinput"
+]
+
+[start]
+cmd = "bash start.sh"
+
+[variables]
+DJANGO_SETTINGS_MODULE = "maintenatrack.settings_prod"

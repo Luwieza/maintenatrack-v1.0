@@ -3,6 +3,10 @@
 # Railway startup script for MaintenaTrack
 echo "🚀 Starting MaintenaTrack on Railway..."
 
+# Set production settings
+export DJANGO_SETTINGS_MODULE="maintenatrack.settings_prod"
+echo "🔧 Using production settings: $DJANGO_SETTINGS_MODULE"
+
 # Run migrations
 echo "📊 Running database migrations..."
 python manage.py migrate --noinput
