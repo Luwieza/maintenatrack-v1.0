@@ -11,8 +11,14 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-# Allow all hosts on Railway to fix domain issues
-ALLOWED_HOSTS = ['*']
+# Production hosts configuration
+ALLOWED_HOSTS = [
+    'maintenatrack.com',
+    'www.maintenatrack.com', 
+    'web-production-a0007.up.railway.app',  # Railway domain as backup
+    '127.0.0.1',
+    'localhost'
+]
 
 # Application definition
 INSTALLED_APPS = [
